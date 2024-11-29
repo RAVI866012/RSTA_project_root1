@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section>
+    <h2>Upload and Train a Signature</h2>
+    <form method="POST" enctype="multipart/form-data" action="/upload_and_train">
+        <label>Select Signature Type:</label><br>
+        <input type="radio" id="genuine" name="signature_type" value="genuine" required>
+        <label for="genuine">Genuine</label><br>
+        <input type="radio" id="forged" name="signature_type" value="forged" required>
+        <label for="forged">Forged</label><br><br>
+        <label for="file">Choose a signature image:</label>
+        <input type="file" name="file" id="file" required><br><br>
+        <button type="submit">Upload and Train</button>
+    </form>
+    {% if train_result %}
+    <div class="result">
+        <h3>{{ train_result }}</h3>
+    </div>
+    {% endif %}
+</section>
+
+<section>
+    <h2>Verify a Signature</h2>
+    <form method="POST" enctype="multipart/form-data" action="/verify_signature">
+        <label for="file">Upload a signature image to verify:</label>
+        <input type="file" name="file" id="file" required><br><br>
+        <button type="submit">Verify</button>
+    </form>
+    {% if result %}
+    <div class="result">
+        <h3>Result: {{ result }}</h3>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
+
+
